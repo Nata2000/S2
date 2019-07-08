@@ -86,7 +86,8 @@ if (isset($_POST['submit'])) {
 <h1>Analyze image:</h1>
 Image to analyze:
 <input type="text" name="inputImage" id="inputImage"
-    value="<?php echo $url ?>"/>
+    value="https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-1.2.1&auto=format&fit=crop&w=840&q=80" />
+<button onclick="processImage()">Analyze image</button>
 <br><br>
 	
 <div id="wrapper" style="width:1020px; display:table;">
