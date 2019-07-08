@@ -88,7 +88,8 @@ Enter the URL to an image, then click the <strong>Analyze image</strong> button.
 <br><br>
 Image to analyze:
 <input type="text" name="inputImage" id="inputImage"
-    value="https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-1.2.1&auto=format&fit=crop&w=840&q=80"/>
+    <input type="text" name="inputImage" id="inputImage"
+    value="<?php echo $url ?>"/>
 <button onclick="processImage()">Analyze image</button>
 <br><br>
 <div id="wrapper" style="width:1020px; display:table;">
