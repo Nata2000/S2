@@ -13,20 +13,20 @@ if (isset($_POST['submit'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Analyze Sample</title>
+    <title>Analyze Image</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 </head>
-<body>
- 
+<body onload="processImage();">
+
 <script type="text/javascript">
     function processImage() {
         // **********************************************
         // *** Update or verify the following values. ***
         // **********************************************
- 
+
         // Replace <Subscription Key> with your valid subscription key.
         var subscriptionKey = "5ea914dad7ad4ac3b46f0c500c987379";
- 
+
         // You must use the same Azure region in your REST API method as you used to
         // get your subscription keys. For example, if you got your subscription keys
         // from the West US region, replace "westcentralus" in the URL
@@ -37,40 +37,41 @@ if (isset($_POST['submit'])) {
         // this region.
         var uriBase =
             "https://tasya.cognitiveservices.azure.com/vision/v2.0/analyze";
- 
+
         // Request parameters.
         var params = {
             "visualFeatures": "Categories,Description,Color",
             "details": "",
             "language": "en",
         };
- 
+
         // Display the image.
         var sourceImageUrl = document.getElementById("inputImage").value;
         document.querySelector("#sourceImage").src = sourceImageUrl;
- 
+
         // Make the REST API call.
         $.ajax({
             url: uriBase + "?" + $.param(params),
- 
+
             // Request headers.
             beforeSend: function(xhrObj){
                 xhrObj.setRequestHeader("Content-Type","application/json");
                 xhrObj.setRequestHeader(
                     "Ocp-Apim-Subscription-Key", subscriptionKey);
             },
- 
+
             type: "POST",
- 
+
             // Request body.
             data: '{"url": ' + '"' + sourceImageUrl + '"}',
         })
- 
+
         .done(function(data) {
             // Show formatted JSON on webpage.
             $("#responseTextArea").val(JSON.stringify(data, null, 2));
+            $("#description").text(data.description.captions[0].text);
         })
- 
+
         .fail(function(jqXHR, textStatus, errorThrown) {
             // Display error message.
             var errorString = (errorThrown === "") ? "Error. " :
@@ -81,15 +82,13 @@ if (isset($_POST['submit'])) {
         });
     };
 </script>
- 
-<h1>Analyze image:</h1>
-Enter the URL to an image, then click the <strong>Analyze image</strong> button.
-<br><br>
+
 <h1>Analyze image:</h1>
 Image to analyze:
 <input type="text" name="inputImage" id="inputImage"
     value="<?php echo $url ?>"/>
 <br><br>
+	
 <div id="wrapper" style="width:1020px; display:table;">
     <div id="jsonOutput" style="width:600px; display:table-cell;">
         Response:
@@ -101,6 +100,8 @@ Image to analyze:
         Source image:
         <br><br>
         <img id="sourceImage" width="400" />
+        <br>
+	<h3 id="description">Loading description. . .</h3>
     </div>
 </div>
 </body>
