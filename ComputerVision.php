@@ -84,6 +84,8 @@ if (isset($_POST['submit'])) {
 </script>
 
 <h1>Analyze image:</h1>
+Enter the URL to an image, then click the <strong>Analyze image</strong> button.
+<br><br>
 Image to analyze:
 <input type="text" name="inputImage" id="inputImage"
     value="<?php echo $url ?>"/>
