@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
 <html>
 <head>
     <title>Analyze Image</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 </head>
 <body onload="processImage();">
 
@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
         // If you use a free trial subscription key, you shouldn't need to change
         // this region.
         var uriBase =
-            "http://tasya.cognitiveservices.azure.com/vision/v2.0/analyze";
+            "https://tasya.cognitiveservices.azure.com/vision/v2.0/analyze";
 
         // Request parameters.
         var params = {
